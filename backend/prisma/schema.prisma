@@ -23,6 +23,7 @@ enum RoleType {
   PRODUCER
   BUYER
   DELIVERY_PARTNER
+  VETERINARIAN
   ADMIN
 }
 
@@ -197,6 +198,7 @@ model User {
   producer        Producer?
   buyer           Buyer?
   deliveryPartner DeliveryPartner?
+  veterinarian    Veterinarian?
   documents       Document[]       @relation("DocumentOwner")
   notifications   Notification[]
   reputation      Reputation?
@@ -320,6 +322,31 @@ model DeliveryPartner {
 
   @@index([active])
   @@map("delivery_partners")
+}
+
+model Veterinarian {
+  id               String          @id @default(uuid()) @db.Uuid
+  userId           String          @unique @map("user_id") @db.Uuid
+  fullName         String          @map("full_name")
+  document         String          @unique
+  crmv             String          @unique
+  crmvState        String          @map("crmv_state")
+  phone            String
+  contactEmail     String          @map("contact_email")
+  attendanceMode   String          @default("BOTH") @map("attendance_mode")
+  specialties      Json?
+  serviceRegions   Json?           @map("service_regions")
+  cadastralStatus  CadastralStatus @default(PENDING) @map("cadastral_status")
+  active           Boolean         @default(true)
+  createdAt        DateTime        @default(now()) @map("created_at")
+  updatedAt        DateTime        @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([crmvState])
+  @@index([cadastralStatus])
+  @@index([active])
+  @@map("veterinarians")
 }
 
 // ─── Products & Lots ─────────────────────────────────────────────────────────

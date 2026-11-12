@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { ArrowRight, Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { ROLE_HOME, resolveRoleFromEmail } from "@/lib/utils";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -17,7 +18,8 @@ export default function LoginPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email && password) {
-      router.push("/produtor/visao-geral");
+      const role = resolveRoleFromEmail(email);
+      router.push(ROLE_HOME[role]);
     }
   };
 
@@ -51,6 +53,18 @@ export default function LoginPage() {
             <p className="mt-1 text-sm text-agronex-muted">
               Insira suas credenciais para continuar.
             </p>
+            <div className="mt-3 space-y-1.5 rounded-lg bg-green-50 px-3 py-2 text-xs text-agronex-green">
+              <p>
+                Demo (qualquer senha) — abra em{" "}
+                <strong>http://localhost:3000</strong>
+              </p>
+              <p>
+                <strong>vet@teste.com</strong> → veterinário ·{" "}
+                <strong>trans@teste.com</strong> → transportador ·{" "}
+                <strong>compra@teste.com</strong> → comprador · outro e-mail →
+                produtor
+              </p>
+            </div>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">

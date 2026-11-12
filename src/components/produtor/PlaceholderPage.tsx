@@ -5,12 +5,14 @@ interface PlaceholderPageProps {
   title: string;
   description: string;
   backHref?: string;
+  backLabel?: string;
 }
 
 export default function PlaceholderPage({
   title,
   description,
   backHref = "/produtor/visao-geral",
+  backLabel = "Voltar ao Início",
 }: PlaceholderPageProps) {
   return (
     <div className="flex min-h-full flex-col items-center justify-center p-8">
@@ -22,7 +24,7 @@ export default function PlaceholderPage({
           className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-agronex-green hover:underline"
         >
           <ArrowLeft className="h-4 w-4" />
-          Voltar ao Início
+          {backLabel}
         </Link>
       </div>
     </div>

@@ -30,6 +30,7 @@ import { CategoriesModule } from '@/modules/categories/categories.module';
 import { CertificatesModule } from '@/modules/certificates/certificates.module';
 import { DeliveriesModule } from '@/modules/deliveries/deliveries.module';
 import { DeliveryPartnersModule } from '@/modules/delivery-partners/delivery-partners.module';
+import { VeterinariansModule } from '@/modules/veterinarians/veterinarians.module';
 import { DocumentsModule } from '@/modules/documents/documents.module';
 import { HealthModule } from '@/modules/health/health.module';
 import { LotsModule } from '@/modules/lots/lots.module';
@@ -70,6 +71,7 @@ import { UsersModule } from '@/modules/users/users.module';
     ProducersModule,
     BuyersModule,
     DeliveryPartnersModule,
+    VeterinariansModule,
     ProductsModule,
     CategoriesModule,
     LotsModule,

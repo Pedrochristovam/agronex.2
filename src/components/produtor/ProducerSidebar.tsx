@@ -13,6 +13,7 @@ import {
   Settings,
   ShoppingCart,
   Sprout,
+  Stethoscope,
   Truck,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -66,6 +67,12 @@ const navItems = [
     isActive: (pathname: string) => pathname.startsWith("/produtor/documentos"),
     label: "Documentos",
     icon: FileText,
+  },
+  {
+    href: "/produtor/inspecoes",
+    isActive: (pathname: string) => pathname.startsWith("/produtor/inspecoes"),
+    label: "Inspeções Vet.",
+    icon: Stethoscope,
   },
 ];
 

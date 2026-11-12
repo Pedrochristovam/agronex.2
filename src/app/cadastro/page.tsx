@@ -3,7 +3,13 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowRight, BarChart3, Tractor, Truck } from "lucide-react";
+import {
+  ArrowRight,
+  BarChart3,
+  Stethoscope,
+  Tractor,
+  Truck,
+} from "lucide-react";
 import { AppFooter } from "@/components/layout/AppFooter";
 import { Button } from "@/components/ui/Button";
 import { cn, ROLE_ROUTES, type UserRole } from "@/lib/utils";
@@ -14,21 +20,28 @@ const roles = [
     icon: Tractor,
     title: "Sou Produtor",
     description:
-      "Gerencie sua safra, acompanhe cotações e negocie diretamente com compradores.",
+      "Cadastre lotes, publique leilões e gerencie a operação da fazenda.",
   },
   {
     id: "comprador" as UserRole,
     icon: BarChart3,
     title: "Sou Comprador",
     description:
-      "Encontre produtores, analise dados de mercado e garanta suprimentos de qualidade.",
+      "Participe de leilões, garanta suprimentos e acompanhe pedidos.",
   },
   {
     id: "transportador" as UserRole,
     icon: Truck,
     title: "Sou Transportador",
     description:
-      "Conecte-se com demandas de frete, otimize rotas e gerencie sua frota logística.",
+      "Aceite fretes de lotes leiloados, gerencie frota e rotas.",
+  },
+  {
+    id: "veterinario" as UserRole,
+    icon: Stethoscope,
+    title: "Sou Veterinário",
+    description:
+      "Avalie saúde animal por fotos ou presencialmente e emita laudos.",
   },
 ];
 
@@ -49,17 +62,17 @@ export default function CadastroPage() {
           AGRONEX WEB
         </h1>
 
-        <div className="w-full max-w-4xl rounded-2xl border border-agronex-border bg-white p-8 shadow-sm md:p-12">
+        <div className="w-full max-w-5xl rounded-2xl border border-agronex-border bg-white p-8 shadow-sm md:p-12">
           <div className="mb-10 text-center">
             <h2 className="text-2xl font-bold text-agronex-green">
               Bem-vindo ao Agronex
             </h2>
             <p className="mt-2 text-sm text-agronex-muted">
-              Como você deseja utilizar a plataforma?
+              Escolha seu perfil profissional para começar o cadastro
             </p>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {roles.map((role) => {
               const Icon = role.icon;
               const isSelected = selectedRole === role.id;
@@ -70,14 +83,19 @@ export default function CadastroPage() {
                   type="button"
                   onClick={() => setSelectedRole(role.id)}
                   className={cn(
-                    "flex flex-col items-center rounded-xl border-2 p-6 text-center transition-all hover:border-agronex-green/50",
+                    "flex flex-col items-center rounded-xl border-2 p-5 text-center transition-all hover:border-agronex-green/50",
                     isSelected
                       ? "border-agronex-green bg-green-50/50 shadow-sm"
                       : "border-agronex-border bg-white",
                   )}
                 >
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gray-100">
-                    <Icon className="h-6 w-6 text-gray-600" />
+                  <div
+                    className={cn(
+                      "mb-4 flex h-12 w-12 items-center justify-center rounded-lg",
+                      isSelected ? "bg-agronex-green text-white" : "bg-gray-100 text-gray-600",
+                    )}
+                  >
+                    <Icon className="h-6 w-6" />
                   </div>
                   <h3 className="font-semibold text-gray-900">{role.title}</h3>
                   <p className="mt-2 text-xs leading-relaxed text-agronex-muted">
@@ -104,7 +122,10 @@ export default function CadastroPage() {
 
           <p className="mt-6 text-center text-sm text-agronex-muted">
             Já possui conta?{" "}
-            <Link href="/login" className="font-semibold text-agronex-green hover:underline">
+            <Link
+              href="/login"
+              className="font-semibold text-agronex-green hover:underline"
+            >
               Fazer login
             </Link>
           </p>

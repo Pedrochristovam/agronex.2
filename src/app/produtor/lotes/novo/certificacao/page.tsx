@@ -78,6 +78,23 @@ export default function LoteCertificacaoPage() {
             </div>
 
             <div className="rounded-xl border border-agronex-border bg-white p-6 shadow-sm">
+              <h2 className="mb-1 text-sm font-semibold text-gray-900">
+                Inspeção veterinária
+              </h2>
+              <p className="mb-4 text-xs text-agronex-muted">
+                Para lotes animais, solicite laudo por fotos ou visita presencial
+                antes de publicar no leilão.
+              </p>
+              <Button
+                variant="secondary"
+                href="/produtor/inspecoes/nova"
+                className="gap-2"
+              >
+                Solicitar inspeção veterinária
+              </Button>
+            </div>
+
+            <div className="rounded-xl border border-agronex-border bg-white p-6 shadow-sm">
               <LoteWizardActions currentSlug="certificacao" />
             </div>
           </div>
